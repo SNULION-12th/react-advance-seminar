@@ -1,22 +1,32 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import HomePage from "./routes/home";
-import MainPage from "./routes/main";
-import VotePage from "./routes/vote";
-import HistoryPage from "./routes/history";
+import MainPage from "./routes/MainPage";
+import VotePage from "./routes/VotePage";
+import RegisterPage from "./routes/RegisterPage";
+import VoteHistoryPage from "./routes/VoteHistoryPage";
+import FavouriteHistoryPage from "./routes/FavouriteHistoryPage";
+import { getCookie } from "./utils/cookie";
 
 function App() {
+  const userId = getCookie("userId");
 
   return (
     <div className="app">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainPage/>} />
-          <Route path="/home" element={<HomePage/>} />
-          <Route path="/vote" element={<VotePage/>} />
-          <Route path="/history" element={<HistoryPage/>} />
-        </Routes>
-      </BrowserRouter>
+      {!userId ? (
+        <RegisterPage />
+      ) : (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/vote" element={<VotePage />} />
+            <Route path="/vote-history" element={<VoteHistoryPage />} />
+            <Route
+              path="/favourite-history"
+              element={<FavouriteHistoryPage />}
+            />
+          </Routes>
+        </BrowserRouter>
+      )}
     </div>
   );
 }
