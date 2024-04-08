@@ -24,6 +24,7 @@ function App() {
               path="/favourite-history"
               element={<FavouriteHistoryPage />}
             />
+            <Route path="/test" element={<RegisterPage />} />
           </Routes>
         </BrowserRouter>
       )}
