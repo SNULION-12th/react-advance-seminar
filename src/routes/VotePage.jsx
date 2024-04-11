@@ -77,8 +77,8 @@ function VotePage() {
         />
       </div>
       <img
-        src={require("../assets/images/cat-icon.png")}
-        className="w-44 h-32"
+        src={require("../assets/images/cat-icon.jpg")}
+        className="w-44 h-40"
       />
       <div className="w-2/3 h-2/3 py-2 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-[90%] flex justify-evenly items-center">

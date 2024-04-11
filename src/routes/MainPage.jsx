@@ -100,7 +100,7 @@ function HomePage() {
     <div className="w-full h-screen flex flex-col justify-center items-center gap-10">
       <div className="absolute top-[5%] right-[15%] flex gap-8">
         <img
-          src={require("../assets/images/favourite-history-icon.png")}
+          src={require("../assets/images/favourite_history.png")}
           className="w-16 h-16 cursor-pointer"
           onClick={() => navigate("/favourite-history")}
         />
@@ -111,8 +111,8 @@ function HomePage() {
         />
       </div>
       <img
-        src={require("../assets/images/cat-icon.png")}
-        className="w-44 h-32"
+        src={require("../assets/images/cat-icon.jpg")}
+        className="w-44 h-40"
       />
       <div className="w-2/3 h-2/3 relative p-5 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-3/4 grid grid-cols-4 grid-rows-2 gap-4">

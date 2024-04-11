@@ -59,8 +59,8 @@ function VoteHistoryPage() {
         />
       </div>
       <img
-        src={require("../assets/images/cat-icon.png")}
-        className="w-44 h-32"
+        src={require("../assets/images/cat-icon.jpg")}
+        className="w-44 h-40"
       />
       <div className="w-2/3 h-2/3 p-5 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-3/4 grid grid-cols-4 auto-rows-[46%] gap-4 overflow-y-scroll">
