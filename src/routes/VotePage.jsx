@@ -67,22 +67,6 @@ function VotePage() {
     }
   };
 
-  const handleThumbsUpHover = () => {
-    setThumbsUpImage(require("../assets/images/thumbs-up-click.png"));
-  };
-
-  const handleThumbsUpLeave = () => {
-    setThumbsUpImage(require("../assets/images/thumbs-up-icon.png"));
-  };
-
-  const handleThumbsDownHover = () => {
-    setThumbsDownImage(require("../assets/images/thumbs-down-click.png"));
-  };
-
-  const handleThumbsDownLeave = () => {
-    setThumbsDownImage(require("../assets/images/thumbs-down-icon.png"));
-  };
-
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-10">
       <div className="absolute top-[5%] right-[15%] flex gap-8">
@@ -112,15 +96,31 @@ function VotePage() {
             <img
               src={thumbsUpImage}
               className="w-20 h-20 cursor-pointer"
-              onMouseEnter={handleThumbsUpHover}
-              onMouseLeave={handleThumbsUpLeave}
+              onMouseEnter={() => {
+                setThumbsUpImage(
+                  require("../assets/images/thumbs-up-click.png")
+                );
+              }}
+              onMouseLeave={() => {
+                setThumbsUpImage(
+                  require("../assets/images/thumbs-up-icon.png")
+                );
+              }}
               onClick={() => vote(1)}
             />
             <img
               src={thumbsDownImage}
               className="w-20 h-20 cursor-pointer"
-              onMouseEnter={handleThumbsDownHover}
-              onMouseLeave={handleThumbsDownLeave}
+              onMouseEnter={() => {
+                setThumbsDownImage(
+                  require("../assets/images/thumbs-down-click.png")
+                );
+              }}
+              onMouseLeave={() => {
+                setThumbsDownImage(
+                  require("../assets/images/thumbs-down-icon.png")
+                );
+              }}
               onClick={() => vote(-1)}
             />
           </div>
