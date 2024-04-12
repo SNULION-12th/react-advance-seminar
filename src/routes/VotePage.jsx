@@ -14,8 +14,6 @@ function VotePage() {
     require("../assets/images/thumbs-down-icon.png")
   );
 
-  const [image, setImage] = useState({});
-
   useEffect(() => {
     getImage();
   }, []);
@@ -76,19 +74,19 @@ function VotePage() {
       <div className="w-2/3 h-2/3 py-2 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-[90%] flex justify-evenly items-center">
           <img
-            // ### FILL ME ###
+            // ### ONE CAT IMAGE ###
             className="w-3/5 h-full border-[3px] rounded-xl border-[#FF6841]"
           />
           <div className="w-1/3 flex gap-12 justify-center">
             <img
               src={thumbsUpImage}
               className="w-20 h-20 cursor-pointer"
-              // ### FILL ME ###
+              // ### thumbsUpImage Event ###
             />
             <img
               src={thumbsDownImage}
               className="w-20 h-20 cursor-pointer"
-              // ### FILL ME ###
+              // ### thumbsDownImage Event ###
             />
           </div>
         </div>
