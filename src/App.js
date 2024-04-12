@@ -25,6 +25,7 @@ function App() {
               element={<FavouriteHistoryPage />}
             />
             <Route path="/test" element={<RegisterPage />} />
+            <Route path="/advanced" element={<AdvancedAssignment />} />
           </Routes>
         </BrowserRouter>
       )}
