@@ -8,9 +8,12 @@ function RegisterPage() {
     <div className="w-full h-screen bg-[#fc9377] flex justify-center items-center">
       <div className="w-3/5 h-4/5 py-8 px-3 bg-white rounded-md flex flex-col justify-between items-center">
         <div className="w-full flex flex-row justify-end items-center">
-          <img src={require("../assets/images/cat-icon.jpg")} />
+          <img
+            src={require("../assets/images/cat-icon.jpg")}
+            className="w-22 h-20 mr-6"
+          />
         </div>
-        <div className="w-full flex flex-col items-center gap-10">
+        <div className="w-full flex flex-col items-center gap-7">
           <div className="text-5xl text-[#FF6841] font-IBMPlexFont font-bold">
             사용자명을 입력해주세요
           </div>
