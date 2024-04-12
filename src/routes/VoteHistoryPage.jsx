@@ -49,7 +49,7 @@ function VoteHistoryPage() {
                 key={img.url}
                 src={img.url}
                 className={`object-cover w-full h-full border-[3px] border-[#FF6841] rounded-xl ${
-                  img.value < 0 ? "border-red-600" : "border-blue-600"
+                  // ### FILL ME ###
                 }`}
               />
             </div>
