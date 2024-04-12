@@ -8,7 +8,7 @@ function RegisterPage() {
     <div className="w-full h-screen bg-[#fc9377] flex justify-center items-center">
       <div className="w-3/5 h-4/5 py-8 px-3 bg-white rounded-md flex flex-col justify-between items-center">
         <div className="w-full flex flex-row justify-end items-center">
-          <img src={require("../assets/images/cat-icon.png")} />
+          <img src={require("../assets/images/cat-icon.jpg")} />
         </div>
         <div className="w-full flex flex-col items-center gap-10">
           <div className="text-5xl text-[#FF6841] font-IBMPlexFont font-bold">

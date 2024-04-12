@@ -7,6 +7,13 @@ function VotePage() {
   const navigate = useNavigate();
   const userId = getCookie("userId");
 
+  const [thumbsUpImage, setThumbsUpImage] = useState(
+    require("../assets/images/thumbs-up-icon.png")
+  );
+  const [thumbsDownImage, setThumbsDownImage] = useState(
+    require("../assets/images/thumbs-down-icon.png")
+  );
+
   const [image, setImage] = useState({});
 
   useEffect(() => {
@@ -56,10 +63,27 @@ function VotePage() {
           },
         }
       );
+
       console.log(response);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleThumbsUpHover = () => {
+    setThumbsUpImage(require("../assets/images/thumbs-up-click.png"));
+  };
+
+  const handleThumbsUpLeave = () => {
+    setThumbsUpImage(require("../assets/images/thumbs-up-icon.png"));
+  };
+
+  const handleThumbsDownHover = () => {
+    setThumbsDownImage(require("../assets/images/thumbs-down-click.png"));
+  };
+
+  const handleThumbsDownLeave = () => {
+    setThumbsDownImage(require("../assets/images/thumbs-down-icon.png"));
   };
 
   return (
@@ -77,8 +101,8 @@ function VotePage() {
         />
       </div>
       <img
-        src={require("../assets/images/cat-icon.png")}
-        className="w-44 h-32"
+        src={require("../assets/images/cat-icon.jpg")}
+        className="w-44 h-40"
       />
       <div className="w-2/3 h-2/3 py-2 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-[90%] flex justify-evenly items-center">
@@ -88,13 +112,17 @@ function VotePage() {
           />
           <div className="w-1/3 flex gap-12 justify-center">
             <img
-              src={require("../assets/images/thumbs-up-icon.png")}
+              src={thumbsUpImage}
               className="w-20 h-20 cursor-pointer"
+              onMouseEnter={handleThumbsUpHover}
+              onMouseLeave={handleThumbsUpLeave}
               onClick={() => vote(1)}
             />
             <img
-              src={require("../assets/images/thumbs-down-icon.png")}
+              src={thumbsDownImage}
               className="w-20 h-20 cursor-pointer"
+              onMouseEnter={handleThumbsDownHover}
+              onMouseLeave={handleThumbsDownLeave}
               onClick={() => vote(-1)}
             />
           </div>
