@@ -17,6 +17,17 @@ function VoteHistoryPage() {
     try {
       // ### TO DO ###
       // #############
+      const data = response.data;
+      const imageSet = [];
+
+      data.map((e) => {
+        imageSet.push({
+          url: e.image.url,
+          value: e.value,
+        });
+      });
+
+      setImages(imageSet);
     } catch (err) {
       console.log(err);
     }
