@@ -14,7 +14,6 @@ function VoteHistoryPage() {
   }, []);
 
   const getImages = async () => {
-    console.log(userId);
     try {
       const response = await axios.get(
         `https://api.thecatapi.com/v1/votes?limit=100&order=DESC&sub_id=${userId}`,
@@ -28,7 +27,6 @@ function VoteHistoryPage() {
       );
 
       const data = response.data;
-      console.log(data);
       const imageSet = [];
 
       data.map((e) => {

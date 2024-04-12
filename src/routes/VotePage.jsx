@@ -37,7 +37,6 @@ function VotePage() {
         id: data.id,
         url: data.url,
       });
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -63,8 +62,6 @@ function VotePage() {
           },
         }
       );
-
-      console.log(response);
     } catch (err) {
       console.log(err);
     }
