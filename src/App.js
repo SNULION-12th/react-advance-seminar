@@ -5,6 +5,8 @@ import VotePage from "./routes/VotePage";
 import RegisterPage from "./routes/RegisterPage";
 import VoteHistoryPage from "./routes/VoteHistoryPage";
 import FavouriteHistoryPage from "./routes/FavouriteHistoryPage";
+import AdvancedAssignment from "./routes/AdvancedAssignment";
+
 import { getCookie } from "./utils/cookie";
 
 function App() {
