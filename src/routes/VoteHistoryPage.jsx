@@ -14,7 +14,6 @@ function VoteHistoryPage() {
   }, []);
 
   const getImages = async () => {
-    console.log(userId);
     try {
       // ### TO DO ###
       // #############
