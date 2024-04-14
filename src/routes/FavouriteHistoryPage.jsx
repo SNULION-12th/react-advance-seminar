@@ -98,15 +98,19 @@ function FavouriteHistoryPage() {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-10">
-      <div className="absolute top-[5%] right-[15%] flex gap-8">
+      <div className="absolute top-[5%] right-[15%] flex gap-7">
+        <img
+          src={require("../assets/images/favourite-history-click.png")}
+          className="w-[3.8rem] h-[3.8rem]"
+        />
         <img
           src={require("../assets/images/vote-icon.png")}
-          className="w-16 h-16 cursor-pointer"
+          className="w-14 h-14 cursor-pointer"
           onClick={() => navigate("/vote")}
         />
         <img
           src={require("../assets/images/history-icon.png")}
-          className="w-16 h-16 cursor-pointer"
+          className="w-14 h-14 cursor-pointer"
           onClick={() => navigate("/vote-history")}
         />
       </div>
