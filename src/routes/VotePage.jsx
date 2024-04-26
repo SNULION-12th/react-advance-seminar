@@ -36,34 +36,22 @@ function VotePage() {
     }
   };
 
-  const handleThumbsUpHover = () => {
-    setThumbsUpImage(require("../assets/images/thumbs-up-click.png"));
-  };
-
-  const handleThumbsUpLeave = () => {
-    setThumbsUpImage(require("../assets/images/thumbs-up-icon.png"));
-  };
-
-  const handleThumbsDownHover = () => {
-    setThumbsDownImage(require("../assets/images/thumbs-down-click.png"));
-  };
-
-  const handleThumbsDownLeave = () => {
-    setThumbsDownImage(require("../assets/images/thumbs-down-icon.png"));
-  };
-
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-10">
-      <div className="absolute top-[5%] right-[15%] flex gap-8">
+      <div className="absolute top-[5%] right-[16%] flex gap-5">
         <img
-          src={require("../assets/images/history-icon.png")}
-          className="w-16 h-16 cursor-pointer"
-          onClick={() => navigate("/vote-history")}
+          src={require("../assets/images/favourite-history.png")}
+          className="w-[3.8rem] h-[3.8rem] cursor-pointer"
+          onClick={() => navigate("/favourite-history")}
         />
         <img
-          src={require("../assets/images/favourite_history.png")}
-          className="w-16 h-16 cursor-pointer"
-          onClick={() => navigate("/favourite-history")}
+          src={require("../assets/images/vote-icon-click.png")}
+          className="w-14 h-14 "
+        />
+        <img
+          src={require("../assets/images/history-icon.png")}
+          className="w-14 h-14 cursor-pointer"
+          onClick={() => navigate("/vote-history")}
         />
       </div>
       <img
