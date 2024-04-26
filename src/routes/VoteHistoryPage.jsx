@@ -15,6 +15,7 @@ function VoteHistoryPage() {
 
   const getImages = async () => {
     try {
+      let response;
       // ### TO DO ###
       // #############
       const data = response.data;
@@ -63,9 +64,9 @@ function VoteHistoryPage() {
               <img
                 key={img.url}
                 src={img.url}
-                className={`object-cover w-full h-full border-[3px] border-[#FF6841] rounded-xl ${
-                  // ### FILL ME ###
-                }`}
+                className={`object-cover w-full h-full border-[3px] border-[#FF6841] rounded-xl 
+                  ### FILL ME ### 
+                `}
               />
             </div>
           ))}
