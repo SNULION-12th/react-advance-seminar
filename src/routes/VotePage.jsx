@@ -14,8 +14,6 @@ function VotePage() {
     require("../assets/images/thumbs-down-icon.png")
   );
 
-  const [image, setImage] = useState({});
-
   useEffect(() => {
     getImage();
   }, []);
