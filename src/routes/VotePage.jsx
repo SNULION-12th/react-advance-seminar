@@ -69,9 +69,9 @@ function VotePage() {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-10">
-      <div className="absolute top-[5%] right-[15%] flex gap-7">
+      <div className="absolute top-[5%] right-[16%] flex gap-5">
         <img
-          src={require("../assets/images/favourite_history.png")}
+          src={require("../assets/images/favourite-history.png")}
           className="w-[3.8rem] h-[3.8rem] cursor-pointer"
           onClick={() => navigate("/favourite-history")}
         />
