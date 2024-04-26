@@ -22,21 +22,8 @@ function VotePage() {
 
   const getImage = async () => {
     try {
-      const response = await axios.get(
-        "https://api.thecatapi.com/v1/images/search",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key":
-              "live_GKblu8slVg2fFDula9hfgUUWLXlaX6aCWLZpv8pAyFb6Cyhxzq9CkhlwW88Erb0z",
-          },
-        }
-      );
-      const data = response.data[0];
-      setImage({
-        id: data.id,
-        url: data.url,
-      });
+      // ### TO DO ###
+      // #############
     } catch (err) {
       console.log(err);
     }
@@ -44,24 +31,8 @@ function VotePage() {
 
   const vote = async (val) => {
     try {
-      const voted_id = image.id;
-      getImage();
-
-      const response = await axios.post(
-        "https://api.thecatapi.com/v1/votes",
-        {
-          image_id: voted_id,
-          sub_id: userId,
-          value: val,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key":
-              "live_GKblu8slVg2fFDula9hfgUUWLXlaX6aCWLZpv8pAyFb6Cyhxzq9CkhlwW88Erb0z",
-          },
-        }
-      );
+      // ### TO DO ###
+      // #############
     } catch (err) {
       console.log(err);
     }
@@ -93,39 +64,19 @@ function VotePage() {
       <div className="w-2/3 h-2/3 py-2 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-[90%] flex justify-evenly items-center">
           <img
-            src={image.url}
+            // ### ONE CAT IMAGE ###
             className="w-3/5 h-full border-[3px] rounded-xl border-[#FF6841]"
           />
           <div className="w-1/3 flex gap-12 justify-center">
             <img
               src={thumbsUpImage}
               className="w-20 h-20 cursor-pointer"
-              onMouseEnter={() => {
-                setThumbsUpImage(
-                  require("../assets/images/thumbs-up-click.png")
-                );
-              }}
-              onMouseLeave={() => {
-                setThumbsUpImage(
-                  require("../assets/images/thumbs-up-icon.png")
-                );
-              }}
-              onClick={() => vote(1)}
+              // ### thumbsUpImage Event ###
             />
             <img
               src={thumbsDownImage}
               className="w-20 h-20 cursor-pointer"
-              onMouseEnter={() => {
-                setThumbsDownImage(
-                  require("../assets/images/thumbs-down-click.png")
-                );
-              }}
-              onMouseLeave={() => {
-                setThumbsDownImage(
-                  require("../assets/images/thumbs-down-icon.png")
-                );
-              }}
-              onClick={() => vote(-1)}
+              // ### thumbsDownImage Event ###
             />
           </div>
         </div>
