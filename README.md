@@ -86,7 +86,7 @@ git commit -m "Feat: add week# seminar code" (예시입니다)
 
 커맨드를 입력하여 본인이 세미나에서 작성한 내용을 기록합니다.
 
-1. **이후 과제를 위해**
+2. **이후 과제를 위해**
 
 ```jsx
 git checkout -b junyoung(본인 이름)-week#-hw
@@ -96,7 +96,7 @@ git checkout -b junyoung(본인 이름)-week#-hw
 
 이 때 git checkout 명령어는 반드시!!! junyoung(본인 이름) 브랜치에서 입력해야 합니다. 본인이 수업 시간에 작성한 세미나 자료에 이어서 과제를 진행해야 하기 때문입니다!
 
-1. **과제를 모두 완성한 후**
+3. **과제를 모두 완성한 후**
 
 ```jsx
 git add .
@@ -108,7 +108,7 @@ git push origin HEAD
 
 명령어를 입력하여 원격 레포지토리에 `junyoung(본인 이름)-week#-hw` 브랜치를 생성합니다.
 
-1. **과제 완료 후 PR 작성하기**
+4. **과제 완료 후 PR 작성하기**
 
 이후 `junyoung(본인 이름)-week#-hw` 브랜치를 `junyoung(본인 이름)` 로 합치는 Pull Request를 작성합니다. PR 가이드라인은 아래에..
 
