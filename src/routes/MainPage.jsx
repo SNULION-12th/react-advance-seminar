@@ -15,8 +15,31 @@ function HomePage() {
 
   const getImages = async () => {
     try {
-      // ### TO DO ###
-      // #############
+      const response = await axios.get(
+        //getImages 함수 내에서 실제로 axios로 요청을 날리고, 이를 response 객체에 받아옴
+        "https://api.thecatapi.com/v1/images/search?limit=8&size=small",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_k3LObXNngNywEb0446pOynTVv5kgYK4X5WFxTJBGUimIREEcRurFUiYzgXIambCo",
+          },
+        }
+      );
+
+      const data = response.data;
+      const imageSet = [];
+
+      data.map((e) => {
+        imageSet.push({
+          id: e.id,
+          url: e.url,
+          isFavourite: false,
+          favouriteId: null,
+        });
+      });
+
+      setImages(imageSet);
     } catch (err) {
       console.log(err);
     }
@@ -24,8 +47,29 @@ function HomePage() {
 
   const favouritingImage = async (imgId) => {
     try {
-      // ### TO DO ###
-      // #############
+      const response = await axios.post(
+        "https://api.thecatapi.com/v1/favourites",
+        {
+          //request body로 요청에 필요한 값들 같이 보내기
+          image_id: imgId,
+          sub_id: userId,
+        },
+        {
+          //request hearder 작성
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_k3LObXNngNywEb0446pOynTVv5kgYK4X5WFxTJBGUimIREEcRurFUiYzgXIambCo",
+          },
+        }
+      );
+
+      const newImages = [...images];
+      const idx = newImages.findIndex((e) => e.id === imgId); //해당 조건을 만족하는 것의 첫 요소만 따와서 인덱스 반환
+      newImages[idx].isFavourite = true;
+      newImages[idx].favouriteId = response.data.id; //response 객체의 data attribute 안에 응답 데이터들이 담겨있음
+
+      setImages(newImages);
     } catch (err) {
       console.log(err);
     }
@@ -33,8 +77,23 @@ function HomePage() {
 
   const unFavouritingImage = async (favouriteId) => {
     try {
-      // ### TO DO ###
-      // #############
+      const newImages = [...images];
+      const idx = newImages.findIndex((e) => e.favouriteId === favouriteId);
+      newImages[idx].isFavourite = false;
+      newImages[idx].favouriteId = null;
+
+      setImages(newImages);
+
+      const response = await axios.delete(
+        `https://api.thecatapi.com/v1/favourites/${favouriteId}`, //주소에 변수를 넣어서 요청하기
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_k3LObXNngNywEb0446pOynTVv5kgYK4X5WFxTJBGUimIREEcRurFUiYzgXIambCo",
+          },
+        }
+      );
     } catch (err) {
       console.log(err);
     }

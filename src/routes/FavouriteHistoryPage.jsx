@@ -11,12 +11,34 @@ function FavouriteHistoryPage() {
 
   useEffect(() => {
     getImages();
-  }, []);
+  }, []); //매개변수가 비어있으므로 좋아요 삭제시 새로 고침을 해야지만 좋아요 리스트에서 삭제
 
   const getImages = async () => {
     try {
-      // ### TO DO ###
-      // #############
+      const response = await axios.get(
+        `https://api.thecatapi.com/v1/favourites?sub_id=${userId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_k3LObXNngNywEb0446pOynTVv5kgYK4X5WFxTJBGUimIREEcRurFUiYzgXIambCo",
+          },
+        }
+      );
+
+      const data = response.data;
+      const imageSet = [];
+
+      data.map((e) => {
+        imageSet.push({
+          id: e.image.id,
+          url: e.image.url,
+          isFavourite: true,
+          favouriteId: e.id,
+        });
+      });
+
+      setImages(imageSet);
     } catch (err) {
       console.log(err);
     }
