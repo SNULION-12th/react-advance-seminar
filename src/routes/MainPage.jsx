@@ -6,6 +6,8 @@ import { getCookie } from "../utils/cookie";
 function HomePage() {
   const navigate = useNavigate();
   const userId = getCookie("userId");
+  const apikey =
+    "live_NrBfxepuGPuuZQz3LVP52FdmItyWOY9m4ajeRG8nSHfJCSKNMOP1mqjiC2ATgAfZ";
 
   const [images, setImages] = useState([]);
 
@@ -15,10 +17,31 @@ function HomePage() {
 
   const getImages = async () => {
     try {
-      // ### TO DO ###
-      // #############
-    } catch (err) {
-      console.log(err);
+      const response = await axios.get(
+        "https://api.thecatapi.com/v1/images/search?limit=8&size=small",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": apikey,
+          },
+        }
+      );
+
+      const data = response.data;
+      const imageSet = [];
+
+      data.map((e) => {
+        imageSet.push({
+          id: e.id,
+          url: e.url,
+          isFavourite: false,
+          favouriteId: null,
+        });
+      });
+
+      setImages(imageSet);
+    } catch (error) {
+      console.log(error);
     }
   };
 
