@@ -46,8 +46,23 @@ function VotePage() {
 
   const vote = async (val) => {
     try {
-      // ### TO DO ###
-      // #############
+      const response = await axios.post(
+        "https://api.thecatapi.com/v1/votes",
+        {
+          image_id: targetImage.id,
+          sub_id: userId,
+          value: val,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_gewfvpNrJdwp8THGy0iz5FmrqtZtAIqGiJfwyQYXIx2whFNC5pQD8am81DucSbUX",
+          },
+        }
+      );
+      console.log(response);
+      getImage();
     } catch (err) {
       console.log(err);
     }
@@ -107,12 +122,14 @@ function VotePage() {
               className="w-20 h-20 cursor-pointer"
               onMouseOver={handleThumbsUpHover}
               onMouseLeave={handleThumbsUpLeave}
+              onClick={() => vote(1)}
             />
             <img
               src={thumbsDownImage}
               className="w-20 h-20 cursor-pointer"
               onMouseOver={handleThumbsDownHover}
               onMouseLeave={handleThumbsDownLeave}
+              onClick={() => vote(-1)}
             />
           </div>
         </div>

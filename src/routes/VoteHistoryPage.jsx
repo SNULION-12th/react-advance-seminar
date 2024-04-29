@@ -16,8 +16,13 @@ function VoteHistoryPage() {
   const getImages = async () => {
     try {
       let response;
-      // ### TO DO ###
-      // #############
+      response = await axios.get("https://api.thecatapi.com/v1/votes", {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key":
+            "live_gewfvpNrJdwp8THGy0iz5FmrqtZtAIqGiJfwyQYXIx2whFNC5pQD8am81DucSbUX",
+        },
+      });
       const data = response.data;
       const imageSet = [];
 
