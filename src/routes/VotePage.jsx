@@ -21,7 +21,6 @@ function VotePage() {
   const getImage = async () => {
     try {
       // ### TO DO ###
-      // #############
     } catch (err) {
       console.log(err);
     }
