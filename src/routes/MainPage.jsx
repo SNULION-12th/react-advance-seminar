@@ -17,6 +17,7 @@ function HomePage() {
     try {
       // ### TO DO ###
       const response = await axios.get(
+        //'await' = api 요청할 때는 무조건 씀. 이걸 다 할때까지 기다리라는 뜻.
         "https://api.thecatapi.com/v1/images/search?limit=8&size=small",
         {
           headers: {
