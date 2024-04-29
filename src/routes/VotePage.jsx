@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../utils/cookie";
@@ -53,6 +53,25 @@ function VotePage() {
     }
   };
 
+  const handleThumbsUpHover = useCallback(
+    () => setThumbsUpImage(require("../assets/images/thumbs-up-click.png")),
+    []
+  );
+  const handleThumbsUpLeave = useCallback(
+    () => setThumbsUpImage(require("../assets/images/thumbs-up-icon.png")),
+    []
+  );
+
+  const handleThumbsDownHover = useCallback(
+    () => setThumbsDownImage(require("../assets/images/thumbs-down-click.png")),
+    []
+  );
+
+  const handleThumbsDownLeave = useCallback(
+    () => setThumbsDownImage(require("../assets/images/thumbs-down-icon.png")),
+    []
+  );
+
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-10">
       <div className="absolute top-[5%] right-[16%] flex gap-5">
@@ -86,12 +105,14 @@ function VotePage() {
             <img
               src={thumbsUpImage}
               className="w-20 h-20 cursor-pointer"
-              // ### thumbsUpImage Event ###
+              onMouseOver={handleThumbsUpHover}
+              onMouseLeave={handleThumbsUpLeave}
             />
             <img
               src={thumbsDownImage}
               className="w-20 h-20 cursor-pointer"
-              // ### thumbsDownImage Event ###
+              onMouseOver={handleThumbsDownHover}
+              onMouseLeave={handleThumbsDownLeave}
             />
           </div>
         </div>
