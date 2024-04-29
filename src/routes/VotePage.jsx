@@ -2,10 +2,13 @@ import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../utils/cookie";
+import Loading from "../components/Loading";
 
 function VotePage() {
   const navigate = useNavigate();
   const userId = getCookie("userId");
+  const [loading, setLoading] = useState(true);
+
   const [targetImage, setTargetImage] = useState({
     id: "",
     url: "",
@@ -39,6 +42,7 @@ function VotePage() {
         id: image.id,
         url: image.url,
       });
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -46,6 +50,7 @@ function VotePage() {
 
   const vote = async (val) => {
     try {
+      setLoading(true);
       const response = await axios.post(
         "https://api.thecatapi.com/v1/votes",
         {
@@ -61,7 +66,7 @@ function VotePage() {
           },
         }
       );
-      console.log(response);
+
       getImage();
     } catch (err) {
       console.log(err);
@@ -112,10 +117,14 @@ function VotePage() {
       />
       <div className="w-2/3 h-2/3 py-2 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-[90%] flex justify-evenly items-center">
-          <img
-            src={targetImage.url ?? ""}
-            className="w-3/5 h-full border-[3px] rounded-xl border-[#FF6841]"
-          />
+          <div className="w-3/5 h-full border-[3px] rounded-xl border-[#FF6841]">
+            {loading ? (
+              <Loading />
+            ) : (
+              <img src={targetImage.url ?? ""} className="w-full h-full" />
+            )}
+          </div>
+
           <div className="w-1/3 flex gap-12 justify-center">
             <img
               src={thumbsUpImage}
