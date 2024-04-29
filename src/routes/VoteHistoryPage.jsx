@@ -2,36 +2,47 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { getCookie } from "../utils/cookie";
 import { useNavigate } from "react-router-dom";
+import {getValue} from "@testing-library/user-event/dist/utils";
 
 function VoteHistoryPage() {
   const navigate = useNavigate();
 
   const [images, setImages] = useState([]);
   const [userId, setUserId] = useState(getCookie("userId"));
+  const apikey =
+      "live_NrBfxepuGPuuZQz3LVP52FdmItyWOY9m4ajeRG8nSHfJCSKNMOP1mqjiC2ATgAfZ";
 
   useEffect(() => {
     getImages();
   }, []);
 
   const getImages = async () => {
-    try {
-      let response;
-      // ### TO DO ###
-      // #############
-      const data = response.data;
-      const imageSet = [];
+      try {
+        const response = await axios.get(
+            "https://api.thecatapi.com/v1/votes?limit=100",
+            {
+              headers: {
+                "Content-Type": "application/json",
+                "x-api-key": apikey,
+              },
+            }
+        );
 
-      data.map((e) => {
-        imageSet.push({
-          url: e.image.url,
-          value: e.value,
+        const data = response.data;
+        const imageSet = [];
+
+        data.map((e) => {
+          imageSet.push({
+            url: e.image.url,
+              value: e.values,
+              key: e.key,
+          });
         });
-      });
 
-      setImages(imageSet);
-    } catch (err) {
-      console.log(err);
-    }
+        setImages(imageSet);
+      } catch (error) {
+        console.log(error);
+      }
   };
 
   return (
@@ -64,9 +75,7 @@ function VoteHistoryPage() {
               <img
                 key={img.url}
                 src={img.url}
-                className={`object-cover w-full h-full border-[3px] border-[#FF6841] rounded-xl 
-                  ### FILL ME ### 
-                `}
+                className={`object-cover w-full h-full border-[3px] rounded-xl border-[${img.value>0 ? "#3c377c":"#ff0000"}]-500`}
               />
             </div>
           ))}
