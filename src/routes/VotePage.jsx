@@ -49,6 +49,7 @@ function VotePage() {
   };
 
   const vote = async (val) => {
+    if (loading) return;
     try {
       setLoading(true);
       const response = await axios.post(
@@ -128,14 +129,18 @@ function VotePage() {
           <div className="w-1/3 flex gap-12 justify-center">
             <img
               src={thumbsUpImage}
-              className="w-20 h-20 cursor-pointer"
+              className={`w-20 h-20 cursor-pointer ${
+                loading ? "opacity-40" : "opacity-100"
+              }`}
               onMouseOver={handleThumbsUpHover}
               onMouseLeave={handleThumbsUpLeave}
               onClick={() => vote(1)}
             />
             <img
               src={thumbsDownImage}
-              className="w-20 h-20 cursor-pointer"
+              className={`w-20 h-20 cursor-pointer ${
+                loading ? "opacity-40" : "opacity-100"
+              }`}
               onMouseOver={handleThumbsDownHover}
               onMouseLeave={handleThumbsDownLeave}
               onClick={() => vote(-1)}
