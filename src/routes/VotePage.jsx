@@ -6,6 +6,10 @@ import { getCookie } from "../utils/cookie";
 function VotePage() {
   const navigate = useNavigate();
   const userId = getCookie("userId");
+  const [targetImage, setTargetImage] = useState({
+    id: "",
+    url: "",
+  });
 
   const [thumbsUpImage, setThumbsUpImage] = useState(
     require("../assets/images/thumbs-up-icon.png")
@@ -20,8 +24,21 @@ function VotePage() {
 
   const getImage = async () => {
     try {
-      // ### TO DO ###
-      // #############
+      const response = await axios.get(
+        "https://api.thecatapi.com/v1/images/search?limit=1&size=small",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_gewfvpNrJdwp8THGy0iz5FmrqtZtAIqGiJfwyQYXIx2whFNC5pQD8am81DucSbUX",
+          },
+        }
+      );
+      const image = response.data[0];
+      setTargetImage({
+        id: image.id,
+        url: image.url,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -62,7 +79,7 @@ function VotePage() {
       <div className="w-2/3 h-2/3 py-2 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-[90%] flex justify-evenly items-center">
           <img
-            // ### ONE CAT IMAGE ###
+            src={targetImage.url ?? ""}
             className="w-3/5 h-full border-[3px] rounded-xl border-[#FF6841]"
           />
           <div className="w-1/3 flex gap-12 justify-center">
