@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createRoutesFromChildren, useNavigate } from "react-router-dom";
 import { getCookie } from "../utils/cookie";
 
 function FavouriteHistoryPage() {
@@ -15,8 +15,30 @@ function FavouriteHistoryPage() {
 
   const getImages = async () => {
     try {
-      // ### TO DO ###
-      // #############
+      const response = await axios.get(
+        `https://api.thecatapi.com/v1/favourites?sub_id=${userId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_nMUTSoIPj5jfOKAjm6EE2DAkj36djwOvTJw5TIMrdkoICBORccT00uQ2K2tDQ9Sq",
+          },
+        }
+      );
+
+      const data = response.data;
+      const imageSet = [];
+
+      data.map((e) => {
+        imageSet.push({
+          id: e.image.id,
+          url: e.image.url,
+          isFavourite: true,
+          favouriteId: e.id,
+        });
+      });
+
+      setImages(imageSet);
     } catch (err) {
       console.log(err);
     }
@@ -34,7 +56,7 @@ function FavouriteHistoryPage() {
           headers: {
             "Content-Type": "application/json",
             "x-api-key":
-              "live_GKblu8slVg2fFDula9hfgUUWLXlaX6aCWLZpv8pAyFb6Cyhxzq9CkhlwW88Erb0z",
+              "live_nMUTSoIPj5jfOKAjm6EE2DAkj36djwOvTJw5TIMrdkoICBORccT00uQ2K2tDQ9Sq",
           },
         }
       );
@@ -43,7 +65,6 @@ function FavouriteHistoryPage() {
       const idx = newImages.findIndex((e) => e.id === imgId);
       newImages[idx].isFavourite = true;
       newImages[idx].favouriteId = response.data.id;
-
       setImages(newImages);
     } catch (err) {
       console.log(err);
@@ -57,6 +78,9 @@ function FavouriteHistoryPage() {
       newImages[idx].isFavourite = false;
       newImages[idx].favouriteId = null;
 
+      // console.log("unfavorite했다.");
+      // newImages = images.filter((image) => image.isFavourite);
+      // console.log("newimages", newImages);
       setImages(newImages);
 
       const response = await axios.delete(
@@ -65,7 +89,7 @@ function FavouriteHistoryPage() {
           headers: {
             "Content-Type": "application/json",
             "x-api-key":
-              "live_GKblu8slVg2fFDula9hfgUUWLXlaX6aCWLZpv8pAyFb6Cyhxzq9CkhlwW88Erb0z",
+              "live_nMUTSoIPj5jfOKAjm6EE2DAkj36djwOvTJw5TIMrdkoICBORccT00uQ2K2tDQ9Sq",
           },
         }
       );
