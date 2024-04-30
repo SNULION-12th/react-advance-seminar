@@ -34,7 +34,7 @@ function VoteHistoryPage() {
         data.map((e) => {
           imageSet.push({
             url: e.image.url,
-              value: e.values,
+              value: e.value,
               key: e.key,
           });
         });
@@ -75,7 +75,7 @@ function VoteHistoryPage() {
               <img
                 key={img.url}
                 src={img.url}
-                className={`object-cover w-full h-full border-[3px] rounded-xl border-[${img.value>0 ? "#3c377c":"#ff0000"}]-500`}
+                className={`object-cover w-full h-full border-[3px] rounded-xl ${img.value===1 ? "border-blue-500":"border-red-500"}`}
               />
             </div>
           ))}
