@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../utils/cookie";
-
+//temp change
 function VotePage() {
   const navigate = useNavigate();
   const userId = getCookie("userId");
