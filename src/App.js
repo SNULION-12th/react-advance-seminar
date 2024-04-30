@@ -5,8 +5,7 @@ import VotePage from "./routes/VotePage";
 import RegisterPage from "./routes/RegisterPage";
 import VoteHistoryPage from "./routes/VoteHistoryPage";
 import FavouriteHistoryPage from "./routes/FavouriteHistoryPage";
-import AdvancedAssignment from "./routes/AdvancedAssignment";
-
+import CatQuiz from "./routes/CatQuiz";
 import { getCookie } from "./utils/cookie";
 
 function App() {
@@ -27,7 +26,7 @@ function App() {
               element={<FavouriteHistoryPage />}
             />
             <Route path="/test" element={<RegisterPage />} />
-            <Route path="/advanced" element={<AdvancedAssignment />} />
+            <Route path="/CatQuiz" element={<CatQuiz />} />
           </Routes>
         </BrowserRouter>
       )}

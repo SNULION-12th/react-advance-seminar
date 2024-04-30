@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../utils/cookie";
+import LoadingSpinner from "../utils/LoadingSpinner";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -114,35 +115,44 @@ function HomePage() {
           className="w-14 h-14 cursor-pointer"
           onClick={() => navigate("/vote-history")}
         />
+        <img
+          src={require("../assets/images/CatQuiz-icon.png")}
+          className="w-[3.8rem] h-[3.8rem] cursor-pointer"
+          onClick={() => navigate("/CatQuiz")}
+        />
       </div>
       <img
         src={require("../assets/images/cat-icon.jpg")}
         className="w-44 h-40"
       />
       <div className="w-2/3 h-2/3 relative p-5 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
-        <div className="w-full h-3/4 grid grid-cols-4 grid-rows-2 gap-4">
-          {images.map((img) => (
-            <div key={img.id} className="w-full h-full relative">
-              <img
-                src={img.url}
-                className="object-cover w-full h-full border-2 border-[#FF6841] rounded-xl"
-              />
-              {img.isFavourite ? (
+        {images.length > 0 ? (
+          <div className="w-full h-3/4 grid grid-cols-4 grid-rows-2 gap-4">
+            {images.map((img) => (
+              <div key={img.id} className="w-full h-full relative">
                 <img
-                  src={require("../assets/images/favourite-icon.png")}
-                  className="w-8 h-8 absolute bottom-3 right-3 cursor-pointer"
-                  onClick={() => unFavouritingImage(img.favouriteId)}
+                  src={img.url}
+                  className="object-cover w-full h-full border-2 border-[#FF6841] rounded-xl"
                 />
-              ) : (
-                <img
-                  src={require("../assets/images/unfavourite-icon.png")}
-                  className="w-8 h-8 absolute bottom-3 right-3 cursor-pointer"
-                  onClick={() => favouritingImage(img.id)}
-                />
-              )}
-            </div>
-          ))}
-        </div>
+                {img.isFavourite ? (
+                  <img
+                    src={require("../assets/images/favourite-icon.png")}
+                    className="w-8 h-8 absolute bottom-3 right-3 cursor-pointer"
+                    onClick={() => unFavouritingImage(img.favouriteId)}
+                  />
+                ) : (
+                  <img
+                    src={require("../assets/images/unfavourite-icon.png")}
+                    className="w-8 h-8 absolute bottom-3 right-3 cursor-pointer"
+                    onClick={() => favouritingImage(img.id)}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <LoadingSpinner />
+        )}
         <img
           src={require("../assets/images/reload-icon.png")}
           className="w-10 h-10 absolute bottom-5 right-5 cursor-pointer"

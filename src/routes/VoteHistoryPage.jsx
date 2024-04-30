@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { getCookie } from "../utils/cookie";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../utils/LoadingSpinner";
 
 function VoteHistoryPage() {
   const navigate = useNavigate();
@@ -15,9 +16,16 @@ function VoteHistoryPage() {
 
   const getImages = async () => {
     try {
-      let response;
-      // ### TO DO ###
-      // #############
+      let response = await axios.get(
+        `https://api.thecatapi.com/v1/votes?sub_id=${userId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_vYsLJ5vtokEDeWKZoBc9DT2vWuDWmGwiDFcuwXwfLNnguwpw6n36lzZHknj5kSdU",
+          },
+        }
+      );
       const data = response.data;
       const imageSet = [];
 
@@ -27,7 +35,6 @@ function VoteHistoryPage() {
           value: e.value,
         });
       });
-
       setImages(imageSet);
     } catch (err) {
       console.log(err);
@@ -51,26 +58,36 @@ function VoteHistoryPage() {
           src={require("../assets/images/history-icon-click.png")}
           className="w-14 h-14"
         />
+        <img
+          src={require("../assets/images/CatQuiz-icon.png")}
+          className="w-[3.8rem] h-[3.8rem] cursor-pointer"
+          onClick={() => navigate("/CatQuiz")}
+        />
       </div>
       <img
         src={require("../assets/images/cat-icon.jpg")}
         className="w-44 h-40 cursor-pointer"
         onClick={() => navigate("/")}
       />
+
       <div className="w-2/3 h-2/3 p-5 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
-        <div className="w-full h-3/4 grid grid-cols-4 auto-rows-[46%] gap-4 overflow-y-scroll hide-scroll scrollable-content">
-          {images.map((img) => (
-            <div className="w-full h-full relative">
-              <img
-                key={img.url}
-                src={img.url}
-                className={`object-cover w-full h-full border-[3px] border-[#FF6841] rounded-xl 
-                  ### FILL ME ### 
+        {images.length > 0 ? (
+          <div className="w-full h-3/4 grid grid-cols-4 auto-rows-[46%] gap-4 overflow-y-scroll hide-scroll scrollable-content">
+            {images.map((img, i) => (
+              <div className="w-full h-full relative" key={i}>
+                <img
+                  key={i}
+                  src={img.url}
+                  className={`object-cover w-full h-full border-[3px] border-[#FF6841] rounded-xl 
+                  ${img.value > 0 ? "border-red-100" : "border-blue-100"}
                 `}
-              />
-            </div>
-          ))}
-        </div>
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <LoadingSpinner />
+        )}
       </div>
     </div>
   );
