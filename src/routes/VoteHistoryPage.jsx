@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getCookie } from "../utils/cookie";
 import { useNavigate } from "react-router-dom";
 
+
 function VoteHistoryPage() {
   const navigate = useNavigate();
 
@@ -17,6 +18,16 @@ function VoteHistoryPage() {
     try {
       let response;
       // ### TO DO ###
+      response = await axios.get(
+        `https://api.thecatapi.com/v1/votes?sub_id=${userId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_YFQPosMlHDEldUUkwMScqvV4ruWWuJ4lQHpiLZvQWgvpRfQ9ol1Dlzusc60ZaR7B",
+          },
+        }
+      );
       // #############
       const data = response.data;
       const imageSet = [];
@@ -64,10 +75,9 @@ function VoteHistoryPage() {
               <img
                 key={img.url}
                 src={img.url}
-                className={`object-cover w-full h-full border-[3px] border-[#FF6841] rounded-xl 
-                  ### FILL ME ### 
-                `}
+                className={`object-cover w-full h-full border-[3px] ${img.value === 1 ? 'border-[#FF6841] rounded-xl' : 'border-[#417aff] rounded-xl'}`}
               />
+              
             </div>
           ))}
         </div>

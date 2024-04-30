@@ -15,8 +15,30 @@ function FavouriteHistoryPage() {
 
   const getImages = async () => {
     try {
-      // ### TO DO ###
-      // #############
+      const response = await axios.get(
+        `https://api.thecatapi.com/v1/favourites?sub_id=${userId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_YFQPosMlHDEldUUkwMScqvV4ruWWuJ4lQHpiLZvQWgvpRfQ9ol1Dlzusc60ZaR7B",
+          },
+        }
+      );
+
+      const data = response.data;
+      const imageSet = [];
+
+      data.map((e) => {
+        imageSet.push({
+          id: e.image.id,
+          url: e.image.url,
+          isFavourite: true,
+          favouriteId: e.id,
+        });
+      });
+
+      setImages(imageSet);
     } catch (err) {
       console.log(err);
     }
