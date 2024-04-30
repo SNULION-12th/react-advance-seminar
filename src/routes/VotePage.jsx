@@ -18,10 +18,31 @@ function VotePage() {
     getImage();
   }, []);
 
+  // const [voteImg, setVoteImg] = useState({});
+
   const getImage = async () => {
     try {
       // ### TO DO ###
       // #############
+      /*   const response = await axios.get(
+        "https://api.thecatapi.com/v1/images/search?size=med",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_E2HfG1CwoZpsPFqao4D4Tc62pb9LSmDEgY6L5NyMBpvYRv9b2F570XUepEUWWtqO",
+          },
+        }
+      );
+
+      const data = response.data[0];
+      console.log(data);
+      setVoteImg({
+        id: data.id,
+        url: data.url,
+        isFavourite: false,
+        favouriteId: null,
+      });*/
     } catch (err) {
       console.log(err);
     }
@@ -63,6 +84,7 @@ function VotePage() {
         <div className="w-full h-[90%] flex justify-evenly items-center">
           <img
             // ### ONE CAT IMAGE ###
+            //src={voteImg.url}
             className="w-3/5 h-full border-[3px] rounded-xl border-[#FF6841]"
           />
           <div className="w-1/3 flex gap-12 justify-center">

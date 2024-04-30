@@ -17,6 +17,30 @@ function HomePage() {
     try {
       // ### TO DO ###
       // #############
+      const response = await axios.get(
+        "https://api.thecatapi.com/v1/images/search?limit=8&size=small",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_E2HfG1CwoZpsPFqao4D4Tc62pb9LSmDEgY6L5NyMBpvYRv9b2F570XUepEUWWtqO",
+          },
+        }
+      );
+
+      const data = response.data;
+      const imageSet = [];
+
+      data.map((e) => {
+        imageSet.push({
+          id: e.id,
+          url: e.url,
+          isFavourite: false,
+          favouriteId: null,
+        });
+      });
+
+      setImages(imageSet);
     } catch (err) {
       console.log(err);
     }
@@ -26,6 +50,27 @@ function HomePage() {
     try {
       // ### TO DO ###
       // #############
+      const response = await axios.post(
+        "https://api.thecatapi.com/v1/favourites",
+        {
+          image_id: imgId,
+          sub_id: userId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_E2HfG1CwoZpsPFqao4D4Tc62pb9LSmDEgY6L5NyMBpvYRv9b2F570XUepEUWWtqO",
+          },
+        }
+      );
+
+      const newImages = [...images];
+      const idx = newImages.findIndex((e) => e.id === imgId);
+      newImages[idx].isFavourite = true;
+      newImages[idx].favouriteId = response.data.id;
+
+      setImages(newImages);
     } catch (err) {
       console.log(err);
     }
@@ -35,6 +80,23 @@ function HomePage() {
     try {
       // ### TO DO ###
       // #############
+      const newImages = [...images];
+      const idx = newImages.findIndex((e) => e.favouriteId === favouriteId);
+      newImages[idx].isFavourite = false;
+      newImages[idx].favouriteId = null;
+
+      setImages(newImages);
+
+      const response = await axios.delete(
+        `https://api.thecatapi.com/v1/favourites/${favouriteId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_GKblu8slVg2fFDula9hfgUUWLXlaX6aCWLZpv8pAyFb6Cyhxzq9CkhlwW88Erb0z",
+          },
+        }
+      );
     } catch (err) {
       console.log(err);
     }
