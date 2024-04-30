@@ -6,6 +6,7 @@ import RegisterPage from "./routes/RegisterPage";
 import VoteHistoryPage from "./routes/VoteHistoryPage";
 import FavouriteHistoryPage from "./routes/FavouriteHistoryPage";
 import AdvancedAssignment from "./routes/AdvancedAssignment";
+import AdvancedAssignment2 from "./routes/AdvancedAssignment2";
 
 import { getCookie } from "./utils/cookie";
 
@@ -27,7 +28,8 @@ function App() {
               element={<FavouriteHistoryPage />}
             />
             <Route path="/test" element={<RegisterPage />} />
-            <Route path="/advanced" element={<AdvancedAssignment />} />
+            <Route path="/breeds" element={<AdvancedAssignment />} />
+            <Route path="/breedsfact" element={<AdvancedAssignment2 />} />
           </Routes>
         </BrowserRouter>
       )}
