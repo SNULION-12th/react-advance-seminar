@@ -33,8 +33,7 @@ function HomePage() {
 
   const unFavouritingImage = async (favouriteId) => {
     try {
-      // ### TO DO ###
-      // #############
+      
     } catch (err) {
       console.log(err);
     }
