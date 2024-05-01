@@ -78,9 +78,6 @@ function FavouriteHistoryPage() {
       newImages[idx].isFavourite = false;
       newImages[idx].favouriteId = null;
 
-      // console.log("unfavorite했다.");
-      // newImages = images.filter((image) => image.isFavourite);
-      // console.log("newimages", newImages);
       setImages(newImages);
 
       const response = await axios.delete(
@@ -100,27 +97,6 @@ function FavouriteHistoryPage() {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-10">
-      {/* <div className="absolute top-[5%] right-[16%] flex gap-5">
-        <img
-          src={require("../assets/images/favourite-history-click.png")}
-          className="w-[3.8rem] h-[3.8rem]"
-        />
-        <img
-          src={require("../assets/images/vote-icon.png")}
-          className="w-14 h-14 cursor-pointer"
-          onClick={() => navigate("/vote")}
-        />
-        <img
-          src={require("../assets/images/history-icon.png")}
-          className="w-14 h-14 cursor-pointer"
-          onClick={() => navigate("/vote-history")}
-        />
-      </div> */}
-      {/* <img
-        src={require("../assets/images/cat-icon.jpg")}
-        className="w-44 h-40 cursor-pointer"
-        onClick={() => navigate("/")}
-      /> */}
       <div className="w-2/3 h-2/3 relative p-5 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-3/4 grid grid-cols-4 auto-rows-[46%] gap-4 overflow-y-scroll hide-scroll scrollable-content">
           {images.map((img) => (
