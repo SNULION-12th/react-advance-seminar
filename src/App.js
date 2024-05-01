@@ -6,7 +6,7 @@ import RegisterPage from "./routes/RegisterPage";
 import VoteHistoryPage from "./routes/VoteHistoryPage";
 import FavouriteHistoryPage from "./routes/FavouriteHistoryPage";
 import AdvancedAssignment from "./routes/AdvancedAssignment";
-
+import Header from "./components/Header";
 import { getCookie } from "./utils/cookie";
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
         <RegisterPage />
       ) : (
         <BrowserRouter>
+          <Header />
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/vote" element={<VotePage />} />

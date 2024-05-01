@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../utils/cookie";
+import Header from "../components/Header";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -17,6 +18,30 @@ function HomePage() {
     try {
       // ### TO DO ###
       // #############
+      const response = await axios.get(
+        "https://api.thecatapi.com/v1/images/search?limit=8&size=small",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_nMUTSoIPj5jfOKAjm6EE2DAkj36djwOvTJw5TIMrdkoICBORccT00uQ2K2tDQ9Sq",
+          },
+        }
+      );
+
+      const data = response.data;
+      const imageSet = [];
+
+      data.map((e) => {
+        imageSet.push({
+          id: e.id,
+          url: e.url,
+          isFavourite: false,
+          favouriteId: null,
+        });
+      });
+
+      setImages(imageSet);
     } catch (err) {
       console.log(err);
     }
@@ -24,8 +49,27 @@ function HomePage() {
 
   const favouritingImage = async (imgId) => {
     try {
-      // ### TO DO ###
-      // #############
+      const response = await axios.post(
+        "https://api.thecatapi.com/v1/favourites",
+        {
+          image_id: imgId,
+          sub_id: userId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_nMUTSoIPj5jfOKAjm6EE2DAkj36djwOvTJw5TIMrdkoICBORccT00uQ2K2tDQ9Sq",
+          },
+        }
+      );
+
+      const newImages = [...images];
+      const idx = newImages.findIndex((e) => e.id === imgId);
+      newImages[idx].isFavourite = true;
+      newImages[idx].favouriteId = response.data.id;
+
+      setImages(newImages);
     } catch (err) {
       console.log(err);
     }
@@ -33,8 +77,23 @@ function HomePage() {
 
   const unFavouritingImage = async (favouriteId) => {
     try {
-      // ### TO DO ###
-      // #############
+      const newImages = [...images];
+      const idx = newImages.findIndex((e) => e.favouriteId === favouriteId);
+      newImages[idx].isFavourite = false;
+      newImages[idx].favouriteId = null;
+
+      setImages(newImages);
+
+      const response = await axios.delete(
+        `https://api.thecatapi.com/v1/favourites/${favouriteId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_nMUTSoIPj5jfOKAjm6EE2DAkj36djwOvTJw5TIMrdkoICBORccT00uQ2K2tDQ9Sq",
+          },
+        }
+      );
     } catch (err) {
       console.log(err);
     }
@@ -42,7 +101,7 @@ function HomePage() {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-10">
-      <div className="absolute top-[5%] right-[16%] flex gap-5">
+      {/* <div className="absolute top-[5%] right-[16%] flex gap-5">
         <img
           src={require("../assets/images/favourite-history.png")}
           className="w-[3.8rem] h-[3.8rem] cursor-pointer"
@@ -58,11 +117,17 @@ function HomePage() {
           className="w-14 h-14 cursor-pointer"
           onClick={() => navigate("/vote-history")}
         />
-      </div>
-      <img
+        <img
+          src={require("../assets/images/history-icon.png")}
+          className="w-14 h-14 cursor-pointer"
+          onClick={() => navigate("/advanced")}
+        />
+      </div> */}
+
+      {/* <img
         src={require("../assets/images/cat-icon.jpg")}
         className="w-44 h-40"
-      />
+      /> */}
       <div className="w-2/3 h-2/3 relative p-5 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-3/4 grid grid-cols-4 grid-rows-2 gap-4">
           {images.map((img) => (

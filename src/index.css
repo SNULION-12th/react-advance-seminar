@@ -42,3 +42,21 @@ code {
   overflow-y: auto;
   transition: overflow-y 0.3s ease;
 }
+
+.thumbsUp {
+  width: 20px;
+  height: 20px;
+}
+
+.thumbsUpHover {
+  filter: hue-rotate(180deg); /* 예시로 파란색 효과 */
+}
+
+.thumbsDown {
+  width: 20px;
+  height: 20px;
+}
+
+.thumbsDownHover {
+  filter: hue-rotate(-180deg); /* 예시로 빨간색 효과 */
+}
