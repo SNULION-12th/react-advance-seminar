@@ -98,7 +98,6 @@ function HomePage() {
         },
       }
     );
-      // #############
     } catch (err) {
       console.log(err);
     }
