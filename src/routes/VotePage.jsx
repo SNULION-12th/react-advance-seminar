@@ -123,7 +123,7 @@ function VotePage() {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-10">
-      <div className="absolute top-[5%] right-[16%] flex gap-5">
+      {/* <div className="absolute top-[5%] right-[16%] flex gap-5">
         <img
           src={require("../assets/images/favourite-history.png")}
           className="w-[3.8rem] h-[3.8rem] cursor-pointer"
@@ -138,12 +138,12 @@ function VotePage() {
           className="w-14 h-14 cursor-pointer"
           onClick={() => navigate("/vote-history")}
         />
-      </div>
-      <img
+      </div> */}
+      {/* <img
         src={require("../assets/images/cat-icon.jpg")}
         className="w-44 h-40 cursor-pointer"
         onClick={() => navigate("/")}
-      />
+      /> */}
       <div className="w-2/3 h-2/3 py-2 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-[90%] flex justify-evenly items-center">
           <img

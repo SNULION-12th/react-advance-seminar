@@ -44,7 +44,7 @@ function VoteHistoryPage() {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-10">
-      <div className="absolute top-[5%] right-[16%] flex gap-5">
+      {/* <div className="absolute top-[5%] right-[16%] flex gap-5">
         <img
           src={require("../assets/images/favourite-history.png")}
           className="w-[3.8rem] h-[3.8rem] cursor-pointer"
@@ -59,12 +59,12 @@ function VoteHistoryPage() {
           src={require("../assets/images/history-icon-click.png")}
           className="w-14 h-14"
         />
-      </div>
-      <img
+      </div> */}
+      {/* <img
         src={require("../assets/images/cat-icon.jpg")}
         className="w-44 h-40 cursor-pointer"
         onClick={() => navigate("/")}
-      />
+      /> */}
       <div className="w-2/3 h-2/3 p-5 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-3/4 grid grid-cols-4 auto-rows-[46%] gap-4 overflow-y-scroll hide-scroll scrollable-content">
           {images.map((img) => (
