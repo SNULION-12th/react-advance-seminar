@@ -15,9 +15,13 @@ function VoteHistoryPage() {
 
   const getImages = async () => {
     try {
-      let response;
-      // ### TO DO ###
-      // #############
+      let response = await axios.get("https://api.thecatapi.com/v1/votes", {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key":
+            "live_Iyhi1ILrF0FD1vlsdHpX4CYBM37yG1ZXsUjP58Jx4Wov7qsp27cZmsuBjMt0HYVo",
+        },
+      });
       const data = response.data;
       const imageSet = [];
 
@@ -65,7 +69,7 @@ function VoteHistoryPage() {
                 key={img.url}
                 src={img.url}
                 className={`object-cover w-full h-full border-[3px] border-[#FF6841] rounded-xl 
-                  ### FILL ME ### 
+                ${img.value === 1 ? "border-red-500" : "border-blue-500"}
                 `}
               />
             </div>
