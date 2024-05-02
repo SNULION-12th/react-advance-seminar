@@ -20,6 +20,22 @@ function VotePage() {
     getImage();
   }, []);
 
+  const handleThumbsUpHover = () => {
+    setThumbsUpImage(require("../assets/images/thumbs-up-click.png"));
+  };
+
+  const handleThumbsUpLeave = () => {
+    setThumbsUpImage(require("../assets/images/thumbs-up-icon.png"));
+  };
+
+  const handleThumbsDownHover = () => {
+    setThumbsDownImage(require("../assets/images/thumbs-down-click.png"));
+  };
+
+  const handleThumbsDownLeave = () => {
+    setThumbsDownImage(require("../assets/images/thumbs-down-icon.png"));
+  };
+
   const getImage = async () => {
     try {
       // ### TO DO ###
@@ -52,9 +68,9 @@ function VotePage() {
       const response = await axios.post(
         "https://api.thecatapi.com/v1/votes",
         {
-          image_id: val,
+          image_id: oneImage.id,
           sub_id: userId,
-          value: 1,
+          value: val,
         },
         {
           headers: {
@@ -64,6 +80,7 @@ function VotePage() {
           },
         }
       );
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
@@ -103,12 +120,17 @@ function VotePage() {
             <img
               src={thumbsUpImage}
               className="w-20 h-20 cursor-pointer"
-              onClick={() => vote(oneImage.id)}
+              onClick={() => vote(1)}
+              onMouseOver={handleThumbsUpHover}
+              onMouseLeave={handleThumbsUpLeave}
             />
             <img
               src={thumbsDownImage}
               className="w-20 h-20 cursor-pointer"
               // ### thumbsDownImage Event ###
+              onClick={() => vote(-1)}
+              onMouseOver={handleThumbsDownHover}
+              onMouseLeave={handleThumbsDownLeave}
             />
           </div>
         </div>
