@@ -1,29 +1,14 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../utils/cookie";
+import ImageContainer from "../components/ImagesContainer";
 import Loading from "../components/Loading";
 
 function VotePage() {
   const navigate = useNavigate();
   const userId = getCookie("userId");
   const [loading, setLoading] = useState(true);
-
-  const [targetImage, setTargetImage] = useState({
-    id: "",
-    url: "",
-  });
-
-  const [thumbsUpImage, setThumbsUpImage] = useState(
-    require("../assets/images/thumbs-up-icon.png")
-  );
-  const [thumbsDownImage, setThumbsDownImage] = useState(
-    require("../assets/images/thumbs-down-icon.png")
-  );
-
-  useEffect(() => {
-    getImage();
-  }, []);
 
   const getImage = async () => {
     try {
@@ -38,24 +23,35 @@ function VotePage() {
         }
       );
       const image = response.data[0];
-      setTargetImage({
-        id: image.id,
-        url: image.url,
-      });
-      setLoading(false);
+
+      return image;
     } catch (err) {
       console.log(err);
     }
   };
 
+  const [targetImage, setTargetImage] = useState(() => {
+    return getImage();
+  });
+
+  const [thumbsUpImage, setThumbsUpImage] = useState(
+    require("../assets/images/thumbs-up-icon.png")
+  );
+  const [thumbsDownImage, setThumbsDownImage] = useState(
+    require("../assets/images/thumbs-down-icon.png")
+  );
+
   const vote = async (val) => {
     if (loading) return;
+
     try {
-      setLoading(true);
+      const { id } = targetImage.result;
+      setTargetImage(getImage());
+
       const response = await axios.post(
         "https://api.thecatapi.com/v1/votes",
         {
-          image_id: targetImage.id,
+          image_id: id,
           sub_id: userId,
           value: val,
         },
@@ -67,8 +63,6 @@ function VotePage() {
           },
         }
       );
-
-      getImage();
     } catch (err) {
       console.log(err);
     }
@@ -119,11 +113,9 @@ function VotePage() {
       <div className="w-2/3 h-2/3 py-2 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-[90%] flex justify-evenly items-center">
           <div className="w-3/5 h-full border-[3px] rounded-xl border-[#FF6841]">
-            {loading ? (
-              <Loading />
-            ) : (
-              <img src={targetImage.url ?? ""} className="w-full h-full" />
-            )}
+            <Suspense fallback={<Loading activator={setLoading} />}>
+              <ImageContainer image={targetImage} activator={setLoading} />
+            </Suspense>
           </div>
 
           <div className="w-1/3 flex gap-12 justify-center">

@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function Loading() {
+export default function Loading({ activator }) {
   const [loadingImage, setLoadingImage] = useState(
     require("../../assets/images/cat-icon.jpg")
   );
+
+  useEffect(() => activator(true), []);
 
   return (
     <div
