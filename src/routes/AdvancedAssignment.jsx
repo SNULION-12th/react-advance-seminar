@@ -110,24 +110,16 @@ function CatWorldCup() {
         alt="Cat Icon"
       />
       <div className="w-2/3 h-2/3 relative p-5 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
-        {firstMatches.length === 2 && (
-          <div className="w-full h-3/4 grid grid-cols-2 auto-rows-[46%] gap-4">
-            <div key={firstMatches[0].id} className="w-full h-full relative">
+      <div className="w-full h-3/4 grid grid-cols-2 auto-rows-[46%] gap-4">
+          {selectedBreeds.map((img) => (
+            <div key={img.id} className="w-full h-full relative">
               <img
-                src={firstMatches[0].url}
+                src={img.url}
                 className="object-cover w-full h-full border-2 border-[#FF6841] rounded-xl cursor-pointer"
-                alt={firstMatches[0].breedName}
               />
             </div>
-            <div key={firstMatches[1].id} className="w-full h-full relative">
-              <img
-                src={firstMatches[1].url}
-                className="object-cover w-full h-full border-2 border-[#FF6841] rounded-xl cursor-pointer"
-                alt={firstMatches[1].breedName}
-              />
-            </div>
-          </div>
-        )}
+          ))}
+        </div>
       </div>
     </div>
   );

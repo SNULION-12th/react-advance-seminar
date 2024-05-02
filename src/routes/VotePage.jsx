@@ -47,7 +47,6 @@ function VotePage() {
   const vote = async (val) => {
     try {
       // ### TO DO ###
-      // #############
       await axios.post("https://api.thecatapi.com/v1/votes", 
         {
           image_id: catImage.id,

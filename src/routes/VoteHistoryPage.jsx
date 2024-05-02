@@ -16,7 +16,6 @@ function VoteHistoryPage() {
   const getImages = async () => {
     try {
       // ### TO DO ###
-      // #############
       let response = await axios.get(
         `https://api.thecatapi.com/v1/votes?sub_id=${userId}`,
         {
