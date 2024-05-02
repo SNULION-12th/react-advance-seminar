@@ -15,10 +15,19 @@ function VoteHistoryPage() {
 
   const getImages = async () => {
     try {
-      let response;
-      // ### TO DO ###
-      // #############
+      const response = await axios.get(
+        `https://api.thecatapi.com/v1/votes?sub_id=${userId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_E2HfG1CwoZpsPFqao4D4Tc62pb9LSmDEgY6L5NyMBpvYRv9b2F570XUepEUWWtqO",
+          },
+        }
+      );
       const data = response.data;
+      console.log(data);
+
       const imageSet = [];
 
       data.map((e) => {
@@ -37,6 +46,11 @@ function VoteHistoryPage() {
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-10">
       <div className="absolute top-[5%] right-[16%] flex gap-5">
+        <img
+          src={require("../assets/images/free-icon-book-828370.png")}
+          className="w-[3.8rem] h-[3.8rem] cursor-pointer"
+          onClick={() => navigate("/advanced")}
+        />
         <img
           src={require("../assets/images/favourite-history.png")}
           className="w-[3.8rem] h-[3.8rem] cursor-pointer"
@@ -64,8 +78,8 @@ function VoteHistoryPage() {
               <img
                 key={img.url}
                 src={img.url}
-                className={`object-cover w-full h-full border-[3px] border-[#FF6841] rounded-xl 
-                  ### FILL ME ### 
+                className={`object-cover w-full h-full border-[3px]  rounded-xl 
+                ${img.value > 0 ? "border-[blue]" : "border-[red]"}
                 `}
               />
             </div>

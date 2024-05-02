@@ -23,7 +23,7 @@ function FavouriteHistoryPage() {
           headers: {
             "Content-Type": "application/json",
             "x-api-key":
-              "live_GKblu8slVg2fFDula9hfgUUWLXlaX6aCWLZpv8pAyFb6Cyhxzq9CkhlwW88Erb0z",
+              "live_E2HfG1CwoZpsPFqao4D4Tc62pb9LSmDEgY6L5NyMBpvYRv9b2F570XUepEUWWtqO",
           },
         }
       );
@@ -58,7 +58,7 @@ function FavouriteHistoryPage() {
           headers: {
             "Content-Type": "application/json",
             "x-api-key":
-              "live_GKblu8slVg2fFDula9hfgUUWLXlaX6aCWLZpv8pAyFb6Cyhxzq9CkhlwW88Erb0z",
+              "live_E2HfG1CwoZpsPFqao4D4Tc62pb9LSmDEgY6L5NyMBpvYRv9b2F570XUepEUWWtqO",
           },
         }
       );
@@ -89,7 +89,7 @@ function FavouriteHistoryPage() {
           headers: {
             "Content-Type": "application/json",
             "x-api-key":
-              "live_GKblu8slVg2fFDula9hfgUUWLXlaX6aCWLZpv8pAyFb6Cyhxzq9CkhlwW88Erb0z",
+              "live_E2HfG1CwoZpsPFqao4D4Tc62pb9LSmDEgY6L5NyMBpvYRv9b2F570XUepEUWWtqO",
           },
         }
       );
@@ -101,6 +101,11 @@ function FavouriteHistoryPage() {
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-10">
       <div className="absolute top-[5%] right-[16%] flex gap-5">
+        <img
+          src={require("../assets/images/free-icon-book-828370.png")}
+          className="w-[3.8rem] h-[3.8rem] cursor-pointer"
+          onClick={() => navigate("/advanced")}
+        />
         <img
           src={require("../assets/images/favourite-history-click.png")}
           className="w-[3.8rem] h-[3.8rem]"
