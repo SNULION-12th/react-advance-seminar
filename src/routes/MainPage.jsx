@@ -28,6 +28,7 @@ function HomePage() {
       );
 
       const data = response.data;
+      console.log(data);
       const imageSet = [];
 
       data.map((e) => {
@@ -38,7 +39,7 @@ function HomePage() {
           favouriteId: null,
         });
       });
-
+      console.log(imageSet);
       setImages(imageSet);
       // #############
     } catch (err) {
