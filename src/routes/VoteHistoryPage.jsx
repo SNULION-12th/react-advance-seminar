@@ -16,22 +16,15 @@ function VoteHistoryPage() {
   const getImages = async () => {
     try {
       let response;
-      response = await axios.get("https://api.thecatapi.com/v1/votes", {
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key":
-            "live_gewfvpNrJdwp8THGy0iz5FmrqtZtAIqGiJfwyQYXIx2whFNC5pQD8am81DucSbUX",
-        },
-      });
+      // ### TO DO ###
+      // #############
       const data = response.data;
-
       const imageSet = [];
 
       data.map((e) => {
         imageSet.push({
           url: e.image.url,
           value: e.value,
-          id: e.image_id,
         });
       });
 
@@ -67,12 +60,12 @@ function VoteHistoryPage() {
       <div className="w-2/3 h-2/3 p-5 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-3/4 grid grid-cols-4 auto-rows-[46%] gap-4 overflow-y-scroll hide-scroll scrollable-content">
           {images.map((img) => (
-            <div key={img.id} className="w-full h-full relative">
+            <div className="w-full h-full relative">
               <img
                 key={img.url}
                 src={img.url}
                 className={`object-cover w-full h-full border-[3px] border-[#FF6841] rounded-xl 
-                  ${img.value === 1 ? "border-red-600" : "border-blue-600"}
+                  ### FILL ME ### 
                 `}
               />
             </div>

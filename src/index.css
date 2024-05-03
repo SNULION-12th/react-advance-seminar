@@ -42,19 +42,3 @@ code {
   overflow-y: auto;
   transition: overflow-y 0.3s ease;
 }
-
-@keyframes loading-rotate {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.loading-rotate {
-  animation-name: loading-rotate;
-  animation-duration: 3s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
