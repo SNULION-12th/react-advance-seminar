@@ -59,7 +59,7 @@ function HomePage() {
           headers: {
             "Content-Type": "application/json",
             "x-api-key":
-              "live_GKblu8slVg2fFDula9hfgUUWLXlaX6aCWLZpv8pAyFb6Cyhxzq9CkhlwW88Erb0z",
+              "live_qseohf5Rv9Fr2U9LGEyjunIXYLEKkMCMALtqv1H8b4i8fWrQ60QI0JRY1F51WwZk",
           },
         }
       );
@@ -92,7 +92,7 @@ function HomePage() {
           headers: {
             "Content-Type": "application/json",
             "x-api-key":
-              "live_GKblu8slVg2fFDula9hfgUUWLXlaX6aCWLZpv8pAyFb6Cyhxzq9CkhlwW88Erb0z",
+              "live_qseohf5Rv9Fr2U9LGEyjunIXYLEKkMCMALtqv1H8b4i8fWrQ60QI0JRY1F51WwZk",
           },
         }
       );
