@@ -146,6 +146,7 @@ function VotePage() {
               onClick={(e) => {
                 vote(1);
                 handleClick(e);
+                getImage();
               }}
               onMouseEnter={handleThumbsUpHover}
               onMouseLeave={handleThumbsUpLeave}
@@ -157,6 +158,7 @@ function VotePage() {
               onClick={(e) => {
                 vote(-1);
                 handleClick(e);
+                getImage();
               }}
               onMouseEnter={handleThumbsDownHover}
               onMouseLeave={handleThumbsDownLeave}
