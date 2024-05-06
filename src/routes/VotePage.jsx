@@ -6,6 +6,7 @@ import { getCookie } from "../utils/cookie";
 function VotePage() {
   const navigate = useNavigate();
   const userId = getCookie("userId");
+  const [oneImage, setOneImage] = useState("");
 
   const [thumbsUpImage, setThumbsUpImage] = useState(
     require("../assets/images/thumbs-up-icon.png")
@@ -18,9 +19,23 @@ function VotePage() {
     getImage();
   }, []);
 
+
   const getImage = async () => {
     try {
       // ### TO DO ###
+      const response = await axios.get(
+        "https://api.thecatapi.com/v1/images/search?limit=1&size=small",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_GoCeRybQIaU4XZ55ZFc32WGwTDS7cOk3hr660RcPkUEwkz0tb1aXzoXsiTQs0ZQa",
+          },
+        }
+      );
+
+      const data = response.data;
+      setOneImage(data[0]);
       // #############
     } catch (err) {
       console.log(err);
@@ -30,10 +45,43 @@ function VotePage() {
   const vote = async (val) => {
     try {
       // ### TO DO ###
+      const response = await axios.post(
+        "https://api.thecatapi.com/v1/votes",
+        {
+          image_id: oneImage.id,
+          sub_id: userId,
+          value: val
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_YFQPosMlHDEldUUkwMScqvV4ruWWuJ4lQHpiLZvQWgvpRfQ9ol1Dlzusc60ZaR7B",
+          },
+        }
+      );
+      getImage();
       // #############
     } catch (err) {
       console.log(err);
     }
+
+  };
+
+  const handleThumbsUpHover = () => {
+    setThumbsUpImage(require("../assets/images/thumbs-up-click.png"));
+  };
+
+  const handleThumbsUpLeave = () => {
+    setThumbsUpImage(require("../assets/images/thumbs-up-icon.png"));
+  };
+
+  const handleThumbsDownHover = () => {
+    setThumbsDownImage(require("../assets/images/thumbs-down-click.png"));
+  };
+
+  const handleThumbsDownLeave = () => {
+    setThumbsDownImage(require("../assets/images/thumbs-down-icon.png"));
   };
 
   return (
@@ -61,20 +109,37 @@ function VotePage() {
       />
       <div className="w-2/3 h-2/3 py-2 border-4 rounded-2xl border-[#FF6841] flex justify-center items-center">
         <div className="w-full h-[90%] flex justify-evenly items-center">
-          <img
-            // ### ONE CAT IMAGE ###
-            className="w-3/5 h-full border-[3px] rounded-xl border-[#FF6841]"
-          />
+          {oneImage ? (
+            <img
+              // ### ONE CAT IMAGE ###
+              src={oneImage.url}
+              className="w-3/5 h-full border-[3px] rounded-xl border-[#FF6841]"
+            />
+          ) : (
+            <div></div>
+          )}
           <div className="w-1/3 flex gap-12 justify-center">
             <img
               src={thumbsUpImage}
               className="w-20 h-20 cursor-pointer"
               // ### thumbsUpImage Event ###
+              onMouseOver={handleThumbsUpHover}
+              onMouseOut={handleThumbsUpLeave}
+              onClick={() => {
+                vote(1);
+            
+              }}
             />
             <img
               src={thumbsDownImage}
               className="w-20 h-20 cursor-pointer"
               // ### thumbsDownImage Event ###
+              onMouseOver={handleThumbsDownHover}
+              onMouseOut={handleThumbsDownLeave}
+              onClick={() => {
+                vote(-1);
+          
+              }}
             />
           </div>
         </div>
