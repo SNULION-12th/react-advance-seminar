@@ -15,8 +15,6 @@ function FavouriteHistoryPage() {
 
   const getImages = async () => {
     try {
-      // ### TO DO ###
-      // #############
       const response = await axios.get(
         `https://api.thecatapi.com/v1/favourites?sub_id=${userId}`,
         {
