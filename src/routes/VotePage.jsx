@@ -7,6 +7,8 @@ function VotePage() {
   const navigate = useNavigate();
   const userId = getCookie("userId");
 
+  const [catImage, setCatImage] = useState("");
+
   const [thumbsUpImage, setThumbsUpImage] = useState(
     require("../assets/images/thumbs-up-icon.png")
   );
@@ -21,16 +23,59 @@ function VotePage() {
   const getImage = async () => {
     try {
       // ### TO DO ###
-      // #############
+      const response = await axios.get(
+        "https://api.thecatapi.com/v1/images/search?limit=1&size=small",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_09ydkuAUR5yoQ8l7Imfeplu5zoip2MtCC8IgFd9TbVzzEb07gg0TZPziia3gdejX",
+          },
+        }
+      );
+
+      const image = { url: response.data[0].url, id: response.data[0].id };
+      setCatImage(image);
     } catch (err) {
       console.log(err);
     }
   };
 
+  const handleThumbsUpHover = () => {
+    setThumbsUpImage(require("../assets/images/thumbs-up-click.png"));
+  };
+
+  const handleThumbsUpLeave = () => {
+    setThumbsUpImage(require("../assets/images/thumbs-up-icon.png"));
+  };
+
+  const handleThumbsDownHover = () => {
+    setThumbsDownImage(require("../assets/images/thumbs-down-click.png"));
+  };
+
+  const handleThumbsDownLeave = () => {
+    setThumbsDownImage(require("../assets/images/thumbs-down-icon.png"));
+  };
+
   const vote = async (val) => {
     try {
       // ### TO DO ###
-      // #############
+      const response = await axios.post(
+        "https://api.thecatapi.com/v1/votes",
+        {
+          image_id: catImage.id,
+          sub_id: userId,
+          value: val,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_09ydkuAUR5yoQ8l7Imfeplu5zoip2MtCC8IgFd9TbVzzEb07gg0TZPziia3gdejX",
+          },
+        }
+      );
+      getImage();
     } catch (err) {
       console.log(err);
     }
@@ -64,17 +109,24 @@ function VotePage() {
           <img
             // ### ONE CAT IMAGE ###
             className="w-3/5 h-full border-[3px] rounded-xl border-[#FF6841]"
+            src={catImage.url}
           />
           <div className="w-1/3 flex gap-12 justify-center">
             <img
               src={thumbsUpImage}
               className="w-20 h-20 cursor-pointer"
               // ### thumbsUpImage Event ###
+              onMouseEnter={handleThumbsUpHover}
+              onMouseLeave={handleThumbsUpLeave}
+              onClick={() => vote(1)}
             />
             <img
               src={thumbsDownImage}
               className="w-20 h-20 cursor-pointer"
               // ### thumbsDownImage Event ###
+              onMouseEnter={handleThumbsDownHover}
+              onMouseLeave={handleThumbsDownLeave}
+              onClick={() => vote(-1)}
             />
           </div>
         </div>
