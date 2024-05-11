@@ -13,6 +13,7 @@ function VotePage() {
   const [thumbsDownImage, setThumbsDownImage] = useState(
     require("../assets/images/thumbs-down-icon.png")
   );
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     getImage();
@@ -21,16 +22,58 @@ function VotePage() {
   const getImage = async () => {
     try {
       // ### TO DO ###
+      // ### TO DO ###
+
+      const response = await axios.get(
+        "https://api.thecatapi.com/v1/images/search",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_GKblu8slVg2fFDula9hfgUUWLXlaX6aCWLZpv8pAyFb6Cyhxzq9CkhlwW88Erb0z",
+          },
+        }
+      );
+
+      // console.log(response)
+
+      const data = response.data;
+      const imageSet = data[0]
+
+      console.log(imageSet)
+
+      setImages(imageSet);
+      // #############
       // #############
     } catch (err) {
       console.log(err);
     }
   };
 
+
   const vote = async (val) => {
     try {
       // ### TO DO ###
+      const response = await axios.post(
+        "https://api.thecatapi.com/v1/votes",
+        
+          {
+            image_id: images.id,
+            sub_id: userId,
+            value: val
+          },
+          
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key":
+              "live_GKblu8slVg2fFDula9hfgUUWLXlaX6aCWLZpv8pAyFb6Cyhxzq9CkhlwW88Erb0z",
+          },
+        }
+      );
       // #############
+      console.log(response)
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
@@ -63,18 +106,30 @@ function VotePage() {
         <div className="w-full h-[90%] flex justify-evenly items-center">
           <img
             // ### ONE CAT IMAGE ###
+            src={images.url}
             className="w-3/5 h-full border-[3px] rounded-xl border-[#FF6841]"
           />
           <div className="w-1/3 flex gap-12 justify-center">
             <img
               src={thumbsUpImage}
               className="w-20 h-20 cursor-pointer"
-              // ### thumbsUpImage Event ###
-            />
+              onMouseEnter={()=> {setThumbsUpImage(
+                require("../assets/images/thumbs-up-click.png"))
+              }}
+              onMouseLeave={()=> {setThumbsUpImage(
+                require("../assets/images/thumbs-up-icon.png")
+              )}}
+              onClick={()=> vote(1)}/>
             <img
               src={thumbsDownImage}
               className="w-20 h-20 cursor-pointer"
-              // ### thumbsDownImage Event ###
+              onMouseEnter={()=> {setThumbsDownImage(
+                require("../assets/images/thumbs-down-click.png"))
+              }}
+              onMouseLeave={()=> {setThumbsDownImage(
+                require("../assets/images/thumbs-down-icon.png")
+              )}}
+              onClick={()=> vote(-1)}
             />
           </div>
         </div>
